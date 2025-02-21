@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed Preferences</title>
+    <style>
+        body{
+            background: linear-gradient(rgb(240, 240, 144), rgb(233, 127, 127));
+        }
+        h1{
+            text-align: center;
+            background-color: slategray;
+            padding: 25px;
+            font-size: 3.0em;
+            margin-left: -8px;
+            margin-right: -8px;
+            color: aqua;
+
+        }
+
+    h2{
+        text-align: center;
+        font-size: 2.5em;
+        color: rgb(25, 0, 255);
+    }
+
+    .map-feed-container{
+        font-size: 1.5em;
+        line-height: 60px;
+        background: rgb(115, 230, 250);
+        width: fit-content;
+        text-align: center;
+        margin-left: 50%;
+        border: 2px solid gray;
+        border-radius: 10px;
+    }
+
+    .cam-feed-container{
+        font-size: 1.5em;
+        line-height: 60px;
+        background: rgb(115, 230, 250);
+        width: fit-content;
+        text-align: center;
+        margin-left: 50%;
+        border: 2px solid gray;
+        border-radius: 10px;
+    }
+
+    input{
+        width: 200px;
+        height: 25px;
+}
+
+    button{
+        font-size: 1em;
+    }
+
+    button:hover{
+        background: #c4b6b6;
+    }
+
+    button:active{
+        background: #4d9c96;
+        color: blue;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Configure Your Cameras</h1>
+        <hr>
+        <br>
+        <h2>Camera URLs:</h2>
+    </header>
+    <div id="cam-feed-container" class="cam-feed-container">
+        <label for="front-feed">Front Cam URL:</label>
+        <input type="text" id="front-feed" placeholder="Enter URL for Front Feed">
+        <br>
+        <label for="rear-feed">Rear Cam URL:</label>
+        <input type="text" id="rear-feed" placeholder="Enter URL for Rear Feed">
+        <br>
+        <label for="left-feed">Left Cam URL:</label>
+        <input type="text" id="left-feed" placeholder="Enter URL for Left Feed">
+        <br>
+        <label for="right-feed">Right Cam URL:</label>
+        <input type="text" id="right-feed" placeholder="Enter URL for Right Feed">
+        <br>
+        <button id="save-cam-feed" type="submit">Save</button>
+ </div>
+    <br>
+    <br>
+    <hr>
+
+    <h2>Map URLs:</h2>
+    <div id="map-feed-container" class="map-feed-container">
+        <label for="front-map-feed">Front Map URL:</label>
+        <input type="text" id="front-map-feed">
+        <br>
+        <label for="rear-map-feed">Rear Map URL:</label>
+        <input type="text" id="rear-map-feed">
+        <br>
+        <label for="left-map-feed">Left Map URL:</label>
+        <input type="text" id="left-map-feed">
+        <br>
+        <label for="right-map-feed">Right Map URL:</label>
+        <input type="text" id="right-map-feed">
+        <br>
+        <button id="save-map-feed" type="submit">Save</button>
+    </div>
+    
+    <script>
+        document.getElementById('save-cam-feed').addEventListener('click', function() {
+            const feed1URL = document.getElementById('front-feed').value;
+            const feed2URL = document.getElementById('rear-feed').value;
+            const feed3URL = document.getElementById('left-feed').value;
+            const feed4URL = document.getElementById('right-feed').value;
+
+            // Save URLs to localStorage
+            localStorage.setItem('front-feed', feed1URL);
+            localStorage.setItem('rear-feed', feed2URL);
+            localStorage.setItem('left-feed', feed3URL);
+            localStorage.setItem('right-feed', feed4URL);
+
+            // Redirect to the Display Page
+            window.location.href = 'RAV-T.html';  // Replace with the correct path to your display page
+        });
+    </script>
+
+</body>
+</html>

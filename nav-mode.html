@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAV-T Navigation & Power Modes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaeaea;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        .mode-container, .power-container {
+            margin-top: 40px;
+        }
+        .mode-container button, .power-container button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .mode-container button.active, .power-container button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .mode-container button:hover, .power-container button:hover {
+            background-color: #ddd;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .status p {
+            margin: 5px 0;
+        }
+        .status span {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>RAV-T Navigation and Power Modes</h1>
+
+        <!-- Navigation Mode Section -->
+        <div class="mode-container">
+            <h2>Navigation Mode</h2>
+            <button id="autoMode" onclick="setNavigationMode('Auto')">Auto</button>
+            <button id="mannedMode" onclick="setNavigationMode('Manned')">Manned</button>
+            <button id="webControlMode" onclick="setNavigationMode('Web Control')">Web Control</button>
+        </div>
+
+        <!-- Power Mode Section -->
+        <div class="power-container">
+            <h2>Power Mode</h2>
+            <button id="lowPowerMode" onclick="setPowerMode('Low')">Low</button>
+            <button id="highPowerMode" onclick="setPowerMode('High')">High</button>
+        </div>
+
+        <!-- Status Section -->
+        <div class="status">
+            <p><strong>Current Navigation Mode: </strong><span id="navModeStatus">None</span></p>
+            <p><strong>Current Power Mode: </strong><span id="powerModeStatus">None</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Function to set navigation mode
+        function setNavigationMode(mode) {
+            const navButtons = document.querySelectorAll('.mode-container button');
+            navButtons.forEach(button => button.classList.remove('active'));
+
+            const navModeStatus = document.getElementById('navModeStatus');
+            navModeStatus.textContent = mode;
+
+            const activeButton = document.getElementById(mode.toLowerCase() + 'Mode');
+            activeButton.classList.add('active');
+        }
+
+        // Function to set power mode
+        function setPowerMode(mode) {
+            const powerButtons = document.querySelectorAll('.power-container button');
+            powerButtons.forEach(button => button.classList.remove('active'));
+
+            const powerModeStatus = document.getElementById('powerModeStatus');
+            powerModeStatus.textContent = mode;
+
+            const activeButton = document.getElementById(mode.toLowerCase() + 'PowerMode');
+            activeButton.classList.add('active');
+        }
+
+        // Initialize default states
+        window.onload = function() {
+            setNavigationMode('Auto');
+            setPowerMode('Low');
+        }
+    </script>
+
+</body>
+</html>

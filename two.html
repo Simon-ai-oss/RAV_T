@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 LED Control</title>
+  <style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      border-radius: 50%;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+    }
+    input:checked + .slider { background-color: #2196F3; }
+    input:checked + .slider:before { transform: translateX(26px); }
+  </style>
+</head>
+<body>
+
+<h2>Control LED on ESP32</h2>
+<label class="switch">
+  <input type="checkbox" id="ledSwitch" onchange="toggleLED()">
+  <span class="slider round"></span>
+</label>
+
+<script>
+  function toggleLED() {
+    var switchState = document.getElementById('ledSwitch').checked ? 1 : 0;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://<ESP32_IP>/toggle?state=" + switchState, true);
+    xhr.send();
+  }
+</script>
+
+</body>
+</html>

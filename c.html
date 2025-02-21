@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Toggle Example</title>
+    <style>
+        /* Main container for the feeds */
+        #main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columns layout for 2x2 matrix */
+            grid-gap: 10px;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Styles for the feed divs */
+        .feed {
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5em;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Fullscreen style */
+        .fullscreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000; /* Make sure the fullscreen feed is on top */
+        }
+
+        /* Dropdown and checkbox styles */
+        .controls {
+            margin: 10px;
+        }
+
+        /* Additional styling to make feeds look nice */
+        .feed-content {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1{
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+<body>
+<h1>EXAMPLE 1</h1>
+    <div id="main-container">
+        <!-- Front Feed -->
+        <div id="front" class="feed">
+            <div class="controls">
+                <select id="front-feed-select">
+                    <option value="none">None</option>
+                    <option value="camera">Camera</option>
+                    <option value="map">Map</option>
+                </select>
+                <label for="front-fullscreen">Fullscreen:</label>
+                <input type="checkbox" id="front-fullscreen">
+            </div>
+            <div class="feed-content"></div>
+        </div>
+
+        <!-- Rear Feed -->
+        <div id="rear" class="feed">
+            <div class="controls">
+                <select id="rear-feed-select">
+                    <option value="none">None</option>
+                    <option value="camera">Camera</option>
+                    <option value="map">Map</option>
+                </select>
+                <label for="rear-fullscreen">Fullscreen:</label>
+                <input type="checkbox" id="rear-fullscreen">
+            </div>
+            <div class="feed-content"></div>
+        </div>
+
+        <!-- Left Feed -->
+        <div id="left" class="feed">
+            <div class="controls">
+                <select id="left-feed-select">
+                    <option value="none">None</option>
+                    <option value="camera">Camera</option>
+                    <option value="map">Map</option>
+                </select>
+                <label for="left-fullscreen">Fullscreen:</label>
+                <input type="checkbox" id="left-fullscreen">
+            </div>
+            <div class="feed-content"></div>
+        </div>
+
+        <!-- Right Feed -->
+        <div id="right" class="feed">
+            <div class="controls">
+                <select id="right-feed-select">
+                    <option value="none">None</option>
+                    <option value="camera">Camera</option>
+                    <option value="map">Map</option>
+                </select>
+                <label for="right-fullscreen">Fullscreen:</label>
+                <input type="checkbox" id="right-fullscreen">
+            </div>
+            <div class="feed-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to update the content of the feed
+        function updateFeedContent(feedId, selectId) {
+    const selectedOption = document.getElementById(selectId).value;
+    const feedDiv = document.getElementById(feedId);
+    const feedContent = feedDiv.querySelector(".feed-content");
+    feedContent.innerHTML = ""; // Clear previous content
+    feedDiv.style.backgroundColor = "black"; // Default black background
+
+    // Define custom URLs for each feed
+    const cameraUrls = {
+        front: "https://d350.d2mefast.net/tb/a/bc/roho_wa_bwana_twakwalika_utawale_h264_23098.mp4?play",  // Front camera URL
+        rear: "https://example.com/rear-camera-url.mp4",  // Rear camera URL
+        left: "https://example.com/left-camera-url.mp4",  // Left camera URL
+        right: "https://example.com/right-camera-url.mp4"  // Right camera URL
+    };
+
+    const mapUrls = {
+        front: "https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Truck+Location",  // Front map URL
+        rear: "https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Rear+Location",  // Rear map URL
+        left: "https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Left+Location",  // Left map URL
+        right: "https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Right+Location"  // Right map URL
+    };
+
+    if (selectedOption === "camera") {
+        // Show video feed with the respective camera URL
+        const videoElement = document.createElement("video");
+        videoElement.src = cameraUrls[feedId]; // Use specific feed URL
+        videoElement.autoplay = true;
+        videoElement.loop = true;  // Loop the video for continuous playback
+        videoElement.playsinline = true;  // Make the video play inline on mobile
+        videoElement.style.width = "100%";
+        videoElement.style.height = "100%";
+        videoElement.style.objectFit = "cover"; // Make the video cover the whole div
+        feedContent.appendChild(videoElement);
+    } else if (selectedOption === "map") {
+        // Show map with the respective map URL
+        const map = document.createElement("iframe");
+        map.src = mapUrls[feedId]; // Use specific feed map URL
+        map.width = "100%";
+        map.height = "100%";
+        feedContent.appendChild(map);
+    } else {
+        feedContent.textContent = "OFFLINE"; // Default text
+    }
+}
+
+// Independent fullscreen toggle for each feed
+function toggleFullscreen(feedId, checkboxId) {
+    const feedDiv = document.getElementById(feedId);
+    const fullscreenCheckbox = document.getElementById(checkboxId);
+
+    if (fullscreenCheckbox.checked) {
+        // Hide all other feeds and make this feed fullscreen
+        document.querySelectorAll('.feed').forEach(feed => {
+            if (feed.id !== feedId) {
+                feed.style.display = "none";
+            }
+        });
+        feedDiv.classList.add("fullscreen");
+    } else {
+        // Reset all feeds to visible and remove fullscreen mode
+        document.querySelectorAll('.feed').forEach(feed => {
+            feed.style.display = "flex";
+            feed.classList.remove("fullscreen");
+        });
+    }
+}
+
+// Event listeners for the dropdown and fullscreen checkboxes
+document.getElementById("front-feed-select").addEventListener("change", () => updateFeedContent("front", "front-feed-select"));
+document.getElementById("rear-feed-select").addEventListener("change", () => updateFeedContent("rear", "rear-feed-select"));
+document.getElementById("left-feed-select").addEventListener("change", () => updateFeedContent("left", "left-feed-select"));
+document.getElementById("right-feed-select").addEventListener("change", () => updateFeedContent("right", "right-feed-select"));
+
+document.getElementById("front-fullscreen").addEventListener("change", () => toggleFullscreen("front", "front-fullscreen"));
+document.getElementById("rear-fullscreen").addEventListener("change", () => toggleFullscreen("rear", "rear-fullscreen"));
+document.getElementById("left-fullscreen").addEventListener("change", () => toggleFullscreen("left", "left-fullscreen"));
+document.getElementById("right-fullscreen").addEventListener("change", () => toggleFullscreen("right", "right-fullscreen"));
+
+// Initial content setup for each feed
+updateFeedContent("front", "front-feed-select");
+updateFeedContent("rear", "rear-feed-select");
+updateFeedContent("left", "left-feed-select");
+updateFeedContent("right", "right-feed-select");
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truck Status Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .dashboard-header h1 {
+            font-size: 2rem;
+            color: #333;
+            margin: 0;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .status-card {
+            background: #3498db;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .status-card:hover {
+            transform: translateY(-5px);
+        }
+        .status-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .status-card p {
+            font-size: 1rem;
+            margin: 0;
+        }
+        .status-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .status-card .unit {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Truck Status Dashboard</h1>
+        </div>
+        <div class="status-grid">
+            <!-- Speed -->
+            <div class="status-card" id="speed">
+                <h2>Speed</h2>
+                <p><span class="value" id="speedValue">0</span> <span class="unit">km/h</span></p>
+            </div>
+            <!-- Fuel Level -->
+            <div class="status-card" id="fuel">
+                <h2>Fuel Level</h2>
+                <p><span class="value" id="fuelValue">0</span> <span class="unit">%</span></p>
+            </div>
+            <!-- Temperature -->
+            <div class="status-card" id="temperature">
+                <h2>Engine Temp</h2>
+                <p><span class="value" id="tempValue">0</span> <span class="unit">&#8451;</span></p>
+            </div>
+            <!-- Battery Status -->
+            <div class="status-card" id="battery">
+                <h2>Battery</h2>
+                <p><span class="value" id="batteryValue">0</span> <span class="unit">%</span></p>
+            </div>
+            <!-- Location -->
+            <div class="status-card" id="location">
+                <h2>Location</h2>
+                <p id="locationValue">Fetching...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate real-time updates with random values
+        function updateDashboard() {
+            // Simulated data
+            const speed = Math.floor(Math.random() * 121); // 0 - 120 km/h
+            const fuel = Math.floor(Math.random() * 101); // 0 - 100%
+            const temperature = (Math.random() * 50 + 30).toFixed(1); // 30 - 80 °C
+            const battery = Math.floor(Math.random() * 101); // 0 - 100%
+
+            // Update elements
+            document.getElementById('speedValue').textContent = speed;
+            document.getElementById('fuelValue').textContent = fuel;
+            document.getElementById('tempValue').textContent = temperature;
+            document.getElementById('batteryValue').textContent = battery;
+        }
+
+        // Simulate fetching location
+        function updateLocation() {
+            const locationElement = document.getElementById('locationValue');
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    locationElement.textContent = `Lat: ${latitude.toFixed(4)}, Lon: ${longitude.toFixed(4)}`;
+                },
+                (error) => {
+                    locationElement.textContent = "Unable to fetch location.";
+                }
+            );
+        }
+
+        // Initialize updates
+        setInterval(updateDashboard, 2000); // Update status every 2 seconds
+        setInterval(updateLocation, 5000); // Update location every 5 seconds
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to RAV-T</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+            background-image: url('truck3.png');
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            animation: flipIn 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #fff;
+            background: #4caf50;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons a:hover {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+
+        .buttons a.sign-up {
+            background: #f44336;
+        }
+
+        .buttons a.sign-up:hover {
+            background: #e53935;
+        }
+
+        @keyframes flipIn {
+            0% {
+                transform: rotateX(-90deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header><img src="logo.png" alt="Icon" style="width: 100px; height: 100px;">RAV-T: Revolutionizing Autonomous Transport</header>
+    <div class="hero">
+        <h1>Welcome to RAV-T</h1>
+        <p>Experience the future of transportation with our cutting-edge Robotic Autonomous Vehicle Truck system. Delivering efficiency, security, and technology at its best.</p>
+        <div class="buttons">
+            <a href="RAV-T-LOGIN.html">Log In</a>
+            <a href="RAV-T-SIGNUP.html" class="sign-up">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

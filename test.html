@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f7fa;
+            color: #444;
+            overflow-x: hidden;
+        }
+
+        h1, p {
+            margin-bottom: 1em;
+        }
+
+        /* Keyframe Animations */
+        @keyframes slideInLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes rotateIn {
+            0% {
+                transform: rotate(0);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        @keyframes colorShift {
+            0% {
+                background-color: #6a11cb;
+            }
+            50% {
+                background-color: #2575fc;
+            }
+            100% {
+                background-color: #6a11cb;
+            }
+        }
+
+        /* Left Container with Animated Background */
+        .left-container {
+            width: 50%;
+            height: 100vh;
+            background-image: url('https://st4.depositphotos.com/4312111/22062/i/450/depositphotos_220621562-stock-photo-truck-running-road-speed.jpg');
+            background-position: -1000px;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInLeft 1.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        li{
+            list-style-type: none;
+            line-height: 30px;
+            font-size: large;
+            font-weight: 700;
+        }
+
+        .left-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            opacity: 0.3;
+            animation: shimmer 1.5s infinite linear;
+        }
+
+        /* Circle with Animated Text */
+        .circle {
+            width: 250px;
+            height: 250px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #6a11cb;
+            text-transform: uppercase;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+            animation: rotateIn 3s ease-in-out infinite;
+        }
+
+        /* Right Container with Form */
+        .right-container {
+            width: 50%;
+            background-color: #97f0f3;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 1.5s ease-out;
+        }
+
+        .right-container h1 {
+            font-size: 3em;
+            font-weight: bold;
+            color: #2a2a2a;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .right-container p {
+            color: #777;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            opacity: 0.9;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        /* Form Styles */
+        .contact-form {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: scaleUp 1s ease-in-out;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 4px 20px rgba(106, 17, 203, 0.3);
+        }
+
+        .contact-form button {
+            padding: 15px;
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            animation: pulse 2s infinite ease-in-out;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #2575fc;
+            transform: scale(1.05);
+        }
+
+        .contact-form button:active {
+            transform: scale(0.98);
+        }
+
+        a{
+            text-decoration: none;
+        }
+
+        /* Responsiveness */
+        @media screen and (max-width: 768px) {
+            .left-container, .right-container {
+                width: 100%;
+                height: auto;
+            }
+
+            .contact-form {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div style="display: flex;">
+
+        <!-- Left Section with Complex Animated Background -->
+        <div class="left-container">
+            <div class="circle"><b>CONTACT US:</b></div>
+        </div>
+
+        <!-- Right Section with Contact Form -->
+        <div class="right-container">
+            <h1>Contact Us</h1>
+            <p>If you have any questions, feedback, or inquiries, feel free to reach out to us!</p>
+            <ul>
+                <li>Email: <a href="mailto:gitusimon7969@gmail.com">gitusimon7969@gmail.com</a></li>
+                <li>Tel: +254114172347</li>
+                <li>P.O. BOX 123456</li>
+                <li>Whatsapp: <a href="wa.me/+254114172347">0114172347</a></li>
+                <li>Facebook: <a href="https://www.facebook.com/simong.mwangi.54">Simon G Mwangi</a></li>
+            </ul>
+
+            <form class="contact-form">
+                <h2>For further enquiries:</h2>
+                <input type="text" id="name" name="name" placeholder="Your Full Name" required />
+                <input type="email" id="email" name="email" placeholder="Your Email Address" required />
+                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>

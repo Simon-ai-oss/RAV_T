@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAV-T TRUCK CONTROL</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="RAV-T.css">
+    <script src="RAV-T.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 id="headerh1">RAV-T TRUCK CONTROL INTERFACE</h1>
+    </header>
+    
+    <main>
+        <div id="container" class="container">
+            <div class="buttonhub1" id="buttonhub1">
+                <!-- Home button -->
+                <div class="button-container" data-menu-id="menu-home">
+                    <div class="circle">
+                        <i class="fas fa-home"></i>  
+                    </div>
+                    <div class="label"><b>Home</b></div>
+                </div>
+                <hr>
+                <!-- Info button -->
+                <div class="button-container" data-menu-id="menu-info">
+                    <div class="circle">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="label"><b>Truck Info</b></div>
+                </div>
+                <hr>
+                <!-- Settings button -->
+                <div class="button-container" data-menu-id="menu-settings">
+                    <div class="circle">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="label"><b>Settings</b></div>
+                </div>
+                <hr>
+                <!-- Contact button -->
+                <div class="button-container" data-menu-id="menu-contact">
+                    <div class="circle">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="label"><b>Contact</b></div>
+                </div>
+                <hr>
+                <!-- Help button -->
+                <div class="button-container" data-menu-id="menu-help">
+                    <div class="circle">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="label"><b>Help</b></div>
+                </div>
+                <hr>
+                <!-- About button -->
+                <div class="button-container" data-menu-id="menu-about">
+                    <div class="circle">
+                        <i class="fa-solid fa-a"></i>
+                    </div>
+                    <div class="label"><b>About</b></div>
+                </div>
+                <hr>
+                <!-- Exit button -->
+                <div class="button-container" data-menu-id="menu-exit">
+                    <div class="circle">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                    <div class="label"><b>Exit</b></div>
+                </div>
+            </div>
+        
+
+            <div id="menu-home" class="menu">
+                <ul>
+                    <li class="active"><a href="RAV-T.html">Dashboard</a></li>
+                    <li><a href="#">Navigation Path</a></li>
+                    <li><a href="#">Trip Summary</a></li>
+                    <li><a href="maintenance.html">Maintenance</a></li>
+                    <li><a href="#">Active Routes</a></li>
+                    <li><a href="truck-status.html">Truck Status</a></li>
+                    <li><a href="#">Notifications</a></li>
+                </ul>
+            </div>
+        
+            <div id="menu-info" class="menu">
+                <ul>
+                    <li><a href="sensor-status.html">Sensor Status</a></li>
+                    <li><a href="nav-mode.html">Navigation Mode</a></li>
+                    <li><a href="">Geofencing Status</a></li>
+                    <li><a href="#">Delivery Details</a></li>
+                    <li><a href="#">Traffic Reports</a></li>
+                    <li><a href="#">Vehicle Health Status</a></li>
+                    <li><a href="#">Engine Diagnostics</a></li>
+                    <li><a href="#">Firmware Updates</a></li>
+                    <li><a href="#">Truck Specifications</a></li>
+                </ul>
+            </div>
+        
+            <div id="menu-settings" class="menu">
+                <ul>
+                    <li><a href="#">Navigation Settings</a></li>
+                    <li><a href="cam-feed.html">Camera Feed Preferences</a></li>
+                    <li><a href="#">Audio & Alert Settings</a></li>
+                    <li><a href="#">Security Settings (User Access)</a></li>
+                    <li><a href="#">Data Syncing</a></li>
+                    <li><a href="#">Remote Settings</a></li>
+                    <li><a href="#">User Preferences</a></li>
+                </ul>
+            </div>
+        
+            <div id="menu-contact" class="menu">
+                <ul>
+                    <li><a href="#">Request Technical Assistance</a></li>
+                    <li><a href="#">Emergency Services</a></li>
+                    <li><a href="#">System Help</a></li>
+                    <li><a href="#">Report Incident</a></li>
+                    <li><a href="#">Feedback Submission</a></li>
+            </div>
+        
+            <div id="menu-help" class="menu">
+                <ul>
+                    <li><a href="#">User Manual</a></li>
+                    <li><a href="#">Troubleshooting</a></li>
+                    <li><a href="#">Configuration Help</a>
+                    <li><a href="#">Dashboard Explanation</a></li>
+                    <li><a href="#">Software Update Instructions</a></li>
+                </ul>
+            </div>
+        
+            <div id="menu-about" class="menu">
+                <ul>
+                    <li><a href="#">Company Overview</a></li>
+                    <li><a href="#">Truck Model & Version</a></li>
+                    <li><a href="#">Certifications</a></li>
+                    <li><a href="#">Usage Policies</a></li>
+                    <li><a href="#">Performance Data</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+        
+            <div id="menu-exit" class="menu">
+                <ul>
+                    <li><a href="#">Logout</a></li>
+                    <li><a href="#">Reset System</a></li>
+                    <li><a href="#">Exit</a></li>
+                </ul>
+            </div>
+
+
+        <div class="cameras" id="cameras">
+            <div id="camerasup" class="camerasup"><div id="front">
+                <div id="front-select" class="front-select">
+                    <select id="front-feed-select" onchange="updateFrontContent()">
+                        <option value="none">None</option>
+                        <option value="camera">Camera</option>
+                        <option value="map">Map</option>
+                    </select>
+                    <input type="checkbox" id="front-checkbox">
+                    <label for="front-checkbox" id="front-checkbox-label">FullScreen:</label>
+                </div>
+                <div id="front-content" class="front-content">
+                    <!-- Camera feed or map will be inserted here based on selection -->
+                </div>
+            </div>
+            <div id="rear">
+                <div id="rear-select" class="rear-select">
+                    <select id="rear-feed-select" onchange="updateRearContent()">
+                        <option value="none">None</option>
+                        <option value="camera">Camera</option>
+                        <option value="map">Map</option>
+                    </select>
+                    <input type="checkbox" id="rear-checkbox">
+                    <label for="rear-checkbox" id="rear-checkbox-label">FullScreen:</label>
+                </div>
+                <div id="rear-content" class="rear-content">
+                    <!-- Camera feed or map will be inserted here based on selection -->
+                </div>
+            </div></div>
+
+            <div id="camerasdown" class="camerasdown"><div id="left">
+                <div id="left-select" class="left-select">
+                    <select id="left-feed-select" onchange="updateLeftContent()">
+                        <option value="none">None</option>
+                        <option value="camera">Camera</option>
+                        <option value="map">Map</option>
+                    </select>
+                    <input type="checkbox" id="left-checkbox">
+                    <label for="left-checkbox" id="left-checkbox-label">FullScreen:</label>
+                </div>
+                <div id="left-content" class="left-content">
+                    <!-- Camera feed or map will be inserted here based on selection -->
+                </div>
+            </div>
+
+            <div id="right">
+                <div id="right-select" class="right-select">">
+                        <option value="none">None</option>
+                    <select id="right-feed-select" onchange="updateRightContent()">
+                        <option value="none">None</option>
+                        <option value="camera">Camera</option>
+                        <option value="map">Map</option>
+                    </select>
+                    <input type="checkbox" id="right-checkbox">
+                    <label for="right-checkbox" id="right-checkbox-label">FullScreen:</label>
+                </div>
+                <div id="right-content" class="right-content">
+                    <!-- Camera feed or map will be inserted here based on selection -->
+                </div>
+            </div></div>
+        </div>
+        <div class="buttonhub2" id="buttonhub2">
+            <div class="drive-mode" >
+            <h4><b><u>Drive Mode</u></b></h4>
+            <input type="radio" id="auto" name="mode">
+            <label for="auto">Auto</label><br>
+            <input type="radio" id="web" name="mode">
+            <label for="web">Web</label><br>
+            <input type="radio" id="manned" name="mode">
+            <label for="manned">Manned</label></div>
+            <hr>
+            <div class="signal">
+                <h4>Signal</h4>
+                <button id="left-ind-light">
+                    <i class="fa-solid fa-circle-left"></i>
+                </button>
+                <button id="right-ind-light">
+                    <i class="fa-solid fa-circle-right"></i>
+                </button>
+            </div>
+                <button id="hazard-light">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </button>
+                <hr>
+                <div class="light">
+                    <h4>Light</h4>
+                    <button id="full-light">
+                        <i class="fa-solid fa-lightbulb" id="fa-solid fa-lightbulb" style="color: #ffa200;"></i>
+                    </button>
+                    <label for="full-light" id="full-light"><b>Full Light</b></label><br>
+                    <button id="low-light">
+                        <i class="fa-duotone fa-solid fa-lightbulb" style="--fa-primary-color: #ffa200; --fa-secondary-color: #ffa200;"></i>
+                    </button>
+                    <label for="low-light" id="low-light"><b>Low Light</b></label>
+                </div>
+                <hr>
+                <h4 id="gearh4">Gear</h4>
+                <div class="gear-shifter">
+                    <div class="gear-track"></div>
+                    <div class="gear-labels">
+                        <span id="N">N</span>
+                        <span id="R">R</span>
+                        <span id="D2">D2</span>
+                        <span id="D1">D1</span>
+                    </div>
+                    <div class="indicator" id="indicator"></div>
+                    <div class="gear-value" id="gear-text">N</div>
+                </div>
+                <hr>
+                <h4>More</h4>
+                <button class="horn-btn" id="horn-btn">
+                    <img src="horn.png" alt="Icon" style="width: 20px; height: 20px;">
+                </button>
+                <button class="security-btn" id="security-btn">
+                    <img src="security.png" alt="Icon" style="width: 20px; height: 20px;">
+                </button>
+                <button class="wiper-btn" id="wiper-btn">
+                    <img src="wiper.png" alt="Icon" style="width: 20px; height: 20px;">
+                </button>
+                <button class="wash-btn" id="wash-btn">
+                    <img src="wiperwash.png" alt="Icon" style="width: 20px; height: 20px;">
+                </button>
+                <button class="lock-btn" id="lock-btn">
+                    <img src="lock.png" alt="Icon" style="width: 20px; height: 20px;">
+                </button>
+                <button class="fan-btn" id="fan-btn">
+                    <img src="fan.png" alt="Icon" style="width: 20px; height: 20px;">
+                </button>
+                <hr>
+                <h4>Start Stop</h4>
+                <button class="start-stop-btn" id="start-stop-btn">
+                    <i class="fa-solid fa-power-off"></i><span>Start</span>
+                </button>
+            
+        </div>
+    </div>
+        <div class="buttonhub3" id="buttonhub3">
+            <button id="gas">Gas</button>
+            <button id="brake">Brake</button>
+            <button id="speed">Speed</button>
+            <button id="mileage">Mileage</button>
+            <button id="power">Power</button>
+            <button id="map">Map</button>
+            <button id="left-ind">Left-Ind.</button> 
+            <button id="right-ind">Right-Ind.</button>
+            <button id="left-turn">Left-Turn</button>
+            <button id="right-turn">Right-Turn</button>
+        </div>
+    </main>
+</body>
+</html>

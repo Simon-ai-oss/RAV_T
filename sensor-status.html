@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truck Sensor Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .sensor-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .sensor-header {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .sensor-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            transition: background-color 0.3s;
+        }
+
+        .sensor-item:hover {
+            background-color: #e8f4fc;
+        }
+
+        .sensor-label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .sensor-status {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .sensor-bar {
+            height: 8px;
+            border-radius: 5px;
+            background-color: #ddd;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+
+        .sensor-bar-inner {
+            height: 100%;
+            background-color: #4caf50;
+            transition: width 0.4s ease-in-out;
+        }
+
+        .sensor-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #3498db;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="sensor-container">
+        <div class="sensor-header"><b>RAV-T Sensor Status</b></div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">GPS Sensor</span>
+            <span class="sensor-status" id="gps-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">LiDAR Sensor</span>
+            <span class="sensor-status" id="lidar-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Front Ultrasonic Sensor</span>
+            <span class="sensor-status" id="front-ultrasonic-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Rear Ultrasonic Sensor</span>
+            <span class="sensor-status" id="rear-ultrasonic-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Right Lane Tracking Sensor</span>
+            <span class="sensor-status" id="right-lane-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Left Lane Tracking Sensor</span>
+            <span class="sensor-status" id="left-lane-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Front Camera</span>
+            <span class="sensor-status" id="front-camera-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Rear Camera</span>
+            <span class="sensor-status" id="rear-camera-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Left Camera</span>
+            <span class="sensor-status" id="left-camera-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Right Camera</span>
+            <span class="sensor-status" id="right-camera-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Driver Cabin Temperature Sensor</span>
+            <span class="sensor-status" id="driver-temp-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Cargo Area Temperature Sensor</span>
+            <span class="sensor-status" id="cargo-temp-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">GSM Module</span>
+            <span class="sensor-status" id="gsm-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Gyroscope Sensor</span>
+            <span class="sensor-status" id="gyroscope-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Fingerprint Sensor</span>
+            <span class="sensor-status" id="fingerprint-sensor-status">Loading...</span>
+        </div>
+
+        <div class="sensor-item">
+            <span class="sensor-label">Servo Shield</span>
+            <span class="sensor-status" id="servo-shield-status">Loading...</span>
+        </div>
+
+        <div class="sensor-actions">
+            <button class="action-button" onclick="refreshSensorStatus()">Refresh Sensor Status</button>
+        </div>
+    </div>
+
+    <script>
+        function updateSensorStatus() {
+            // Simulated sensor status data (replace with API or backend calls)
+            const gpsStatus = Math.random() > 0.2 ? "Active" : "Offline";
+            const lidarStatus = Math.random() > 0.2 ? "Operational" : "Malfunctioning";
+            const FrontUltrasonicStatus = Math.random() > 0.2 ? "Active" : "Inactive";
+            const RearUltrasonicStatus = Math.random() > 0.2 ? "Online" : "Disconnected";
+            const RightLaneStatus = Math.random() > 0.2 ? "Active" : "Offline";
+            const LeftLaneStatus = Math.random() > 0.2 ? "Operational" : "Malfunctioning";
+            const FrontCameraStatus = Math.random() > 0.2 ? "Active" : "Inactive";
+            const RearCameraStatus = Math.random() > 0.2 ? "Online" : "Disconnected";
+            const LeftCameraStatus = Math.random() > 0.2 ? "Active" : "Offline";
+            const RightCameraStatus = Math.random() > 0.2 ? "Operational" : "Malfunctioning";
+            const DriverTempStatus = Math.random() > 0.2 ? "Active" : "Inactive";
+            const CargoTempStatus = Math.random() > 0.2 ? "Online" : "Disconnected";
+            const ServoShieldStatus = Math.random() > 0.2 ? "Active" : "Offline";
+            const GsmStatus = Math.random() > 0.2 ? "Operational" : "Malfunctioning";
+           const FingerprintStatus = Math.random() > 0.2 ? "Active" : "Inactive";
+            const GyroscopeStatus = Math.random() > 0.2 ? "Online" : "Disconnected";
+
+
+            // Update DOM
+            document.getElementById('gps-status').textContent = gpsStatus;
+            document.getElementById('lidar-status').textContent = lidarStatus;
+            document.getElementById('front-ultrasonic-status').textContent = FrontUltrasonicStatus;
+            document.getElementById('rear-ultrasonic-status').textContent = RearUltrasonicStatus;
+            document.getElementById('right-lane-status').textContent = RightLaneStatus;
+            document.getElementById('left-lane-status').textContent = LeftLaneStatus;
+            document.getElementById('front-camera-status').textContent = FrontCameraStatus;
+            document.getElementById('rear-camera-status').textContent = RearCameraStatus;
+            document.getElementById('left-camera-status').textContent = LeftCameraStatus;
+            document.getElementById('right-camera-status').textContent = RightCameraStatus;
+            document.getElementById('driver-temp-status').textContent = DriverTempStatus;
+            document.getElementById('cargo-temp-status').textContent = CargoTempStatus;
+            document.getElementById('servo-shield-status').textContent = ServoShieldStatus;
+            document.getElementById('gsm-status').textContent = GsmStatus;
+            document.getElementById('fingerprint-sensor-status').textContent = FingerprintStatus;
+            document.getElementById('gyroscope-status').textContent = GyroscopeStatus;
+
+            // Optionally, change text color based on sensor status
+            const gpsElement = document.getElementById('gps-status');
+            const lidarElement = document.getElementById('lidar-status');
+            const frontultrasonicElement = document.getElementById('front-ultrasonic-status');
+            const rearultrasonicElement = document.getElementById('rear-ultrasonic-status');
+            const frontcameraElement = document.getElementById('front-camera-status');
+            const rearcameraElement = document.getElementById('rear-camera-status');
+            const rightcameraElement = document.getElementById('right-camera-status');
+            const leftcameraElement = document.getElementById('left-camera-status');            
+            const rightlaneElement = document.getElementById('right-lane-status');
+            const leftlaneElement = document.getElementById('left-lane-status');
+            const drivertempElement = document.getElementById('driver-temp-status');
+            const cargotempElement = document.getElementById('cargo-temp-status');            
+            const servoshieldElement = document.getElementById('servo-shield-status');
+            const gsmElement = document.getElementById('gsm-status');
+            const fingerprintElement = document.getElementById('fingerprint-sensor-status');
+            const gyroscopeElement = document.getElementById('gyroscope-status');
+
+            gpsElement.style.color = gpsStatus === "Active" ? "#4caf50" : "#f44336";
+            lidarElement.style.color = lidarStatus === "Operational" ? "#4caf50" : "#f44336";
+            frontultrasonicElement.style.color = FrontUltrasonicStatus === "Active" ? "#4caf50" : "#f44336";
+            rearultrasonicElement.style.color = RearUltrasonicStatus === "Online" ? "#4caf50" : "#f44336";
+            frontcameraElement.style.color = FrontCameraStatus === "Active" ? "#4caf50" : "#f44336";
+            rearcameraElement.style.color = RearCameraStatus === "Operational" ? "#4caf50" : "#f44336";
+            rightcameraElement.style.color = RightCameraStatus === "Active" ? "#4caf50" : "#f44336";
+            leftcameraElement.style.color = LeftCameraStatus === "Online" ? "#4caf50" : "#f44336";            
+            fingerprintElement.style.color = FingerprintStatus === "Active" ? "#4caf50" : "#f44336";
+            rightlaneElement.style.color = RightLaneStatus === "Operational" ? "#4caf50" : "#f44336";
+            leftlaneElement.style.color = LeftLaneStatus === "Active" ? "#4caf50" : "#f44336";
+            drivertempElement.style.color = DriverTempStatus === "Online" ? "#4caf50" : "#f44336";            
+            gyroscopeElement.style.color = GyroscopeStatus === "Active" ? "#4caf50" : "#f44336";
+            cargotempElement.style.color = CargoTempStatus === "Operational" ? "#4caf50" : "#f44336";
+            servoshieldElement.style.color = ServoShieldStatus === "Active" ? "#4caf50" : "#f44336";
+            gsmElement.style.color = GsmStatus === "Online" ? "#4caf50" : "#f44336";
+        }
+
+        function refreshSensorStatus() {
+            updateSensorStatus();
+        }
+
+        // Initial sensor status update
+        window.onload = updateSensorStatus;
+    </script>
+</body>
+</html>

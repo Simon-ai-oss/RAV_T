@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Feed Display</title>
+    <style>
+        .feed-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .feed {
+            width: 45%;
+            height: 300px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Video Feeds</h1>
+    <div class="feed-container">
+        <div class="feed" id="feed1"></div>
+        <div class="feed" id="feed2"></div>
+        <div class="feed" id="feed3"></div>
+        <div class="feed" id="feed4"></div>
+    </div>
+
+    <script>
+        // Fetch URLs from localStorage when the page loads
+        window.onload = function() {
+            const feed1URL = localStorage.getItem('feed1');
+            const feed2URL = localStorage.getItem('feed2');
+            const feed3URL = localStorage.getItem('feed3');
+            const feed4URL = localStorage.getItem('feed4');
+
+            // Create video elements dynamically if URLs exist
+            if (feed1URL) {
+                document.getElementById('feed1').innerHTML = `<video width="100%" height="100%" controls autoplay loop>
+                                                                <source src="${feed1URL}" type="video/mp4">
+                                                              </video>`;
+            }
+            if (feed2URL) {
+                document.getElementById('feed2').innerHTML = `<video width="100%" height="100%" controls autoplay loop>
+                                                                <source src="${feed2URL}" type="video/mp4">
+                                                              </video>`;
+            }
+            if (feed3URL) {
+                document.getElementById('feed3').innerHTML = `<video width="100%" height="100%" controls autoplay loop>
+                                                                <source src="${feed3URL}" type="video/mp4">
+                                                              </video>`;
+            }
+            if (feed4URL) {
+                document.getElementById('feed4').innerHTML = `<video width="100%" height="100%" controls autoplay loop>
+                                                                <source src="${feed4URL}" type="video/mp4">
+                                                              </video>`;
+            }
+        };
+    </script>
+
+</body>
+</html>
